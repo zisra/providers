@@ -1,35 +1,26 @@
-import { Flags } from '@/entrypoint/utils/targets';
+import { Flags } from '@/main/targets';
 import { Caption } from '@/providers/captions';
 
 export type StreamFile = {
   type: 'mp4';
   url: string;
+  headers?: Record<string, string>;
 };
 
-export type Qualities = 'unknown' | '360' | '480' | '720' | '1080' | '4k';
+export type Qualities = 'unknown' | '360' | '480' | '720' | '1080' | '4K';
 
-type ThumbnailTrack = {
-  type: 'vtt';
-  url: string;
-};
-
-type StreamCommon = {
-  id: string; // only unique per output
-  flags: Flags[];
-  captions: Caption[];
-  thumbnailTrack?: ThumbnailTrack;
-  headers?: Record<string, string>; // these headers HAVE to be set to watch the stream
-  preferredHeaders?: Record<string, string>; // these headers are optional, would improve the stream
-};
-
-export type FileBasedStream = StreamCommon & {
+export type FileBasedStream = {
   type: 'file';
+  flags: Flags[];
   qualities: Partial<Record<Qualities, StreamFile>>;
+  captions: Caption[];
 };
 
-export type HlsBasedStream = StreamCommon & {
+export type HlsBasedStream = {
   type: 'hls';
+  flags: Flags[];
   playlist: string;
+  captions: Caption[];
 };
 
 export type Stream = FileBasedStream | HlsBasedStream;

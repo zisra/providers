@@ -6,13 +6,16 @@ import { mixdropScraper } from '@/providers/embeds/mixdrop';
 import { mp4uploadScraper } from '@/providers/embeds/mp4upload';
 import { streambucketScraper } from '@/providers/embeds/streambucket';
 import { streamsbScraper } from '@/providers/embeds/streamsb';
+import { streamvidScraper } from '@/providers/embeds/streamvid';
 import { upcloudScraper } from '@/providers/embeds/upcloud';
 import { upstreamScraper } from '@/providers/embeds/upstream';
 import { vidsrcembedScraper } from '@/providers/embeds/vidsrc';
+import { voeScraper } from '@/providers/embeds/voe';
 import { flixhqScraper } from '@/providers/sources/flixhq/index';
 import { goMoviesScraper } from '@/providers/sources/gomovies/index';
 import { kissAsianScraper } from '@/providers/sources/kissasian/index';
 import { lookmovieScraper } from '@/providers/sources/lookmovie';
+import { primewireScraper } from '@/providers/sources/primewire';
 import { remotestreamScraper } from '@/providers/sources/remotestream';
 import { showboxScraper } from '@/providers/sources/showbox/index';
 import { vidsrcScraper } from '@/providers/sources/vidsrc/index';
@@ -50,6 +53,7 @@ export function gatherAllSources(): Array<Sourcerer> {
     nepuScraper,
     goojaraScraper,
     hdRezkaScraper,
+    primewireScraper,
   ];
 }
 
@@ -74,5 +78,7 @@ export function gatherAllEmbeds(): Array<Embed> {
     vidplayScraper,
     wootlyScraper,
     doodScraper,
+    streamvidScraper,
+    voeScraper,
   ];
 }

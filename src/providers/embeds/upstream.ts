@@ -1,6 +1,6 @@
 import * as unpacker from 'unpacker';
 
-import { flags } from '@/entrypoint/utils/targets';
+import { flags } from '@/main/targets';
 import { makeEmbed } from '@/providers/base';
 
 const packedRegex = /(eval\(function\(p,a,c,k,e,d\).*\)\)\))/;
@@ -17,19 +17,17 @@ export const upstreamScraper = makeEmbed({
 
     if (packed) {
       const unpacked = unpacker.unpack(packed[1]);
+
       const link = unpacked.match(linkRegex);
 
       if (link) {
         return {
-          stream: [
-            {
-              id: 'primary',
-              type: 'hls',
-              playlist: link[1],
-              flags: [flags.CORS_ALLOWED],
-              captions: [],
-            },
-          ],
+          stream: {
+            type: 'hls',
+            playlist: link[1].startsWith('http') ? link[1] : `https://s30.upstreamcdn.co${link[1]}`,
+            flags: [flags.NO_CORS],
+            captions: [],
+          },
         };
       }
     }
